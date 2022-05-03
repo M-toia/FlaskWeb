@@ -26,13 +26,29 @@
   <div class="container"><h1 style="text-align: center;">
 	<h1>Diario Professor</h1>
 	<hr>
-	{% for aluno, nota in diario.items() %}
-	   <details>
+	{% for registro in registros %}
+	  <!--  <details>
 	   	<summary>{{aluno}}</summary>
 	   	<p>{{nota}}</p>
-	   </details>
-	
+	   </details> -->
+			<p>
+			  <a class="btn btn-success" data-bs-toggle="collapse" href="#collapse{{registro.aluno}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+			    {{registro.aluno}}
+			  </a>
+			</p>
+			<div class="collapse" id="collapse{{registro.aluno}}">
+			  <div class="card card-body">
+			    {{registro.nota}}
+			  </div>
+			</div>
 	{% endfor %}
+	<form class="form-group" method="POST" action="{{url_for('sobre')}}">
+		<label>Aluno</label>
+		<input class="form-control"  type="text" name="aluno" required placeholder="Digite o nome do aluno">
+		<label>Nota</label>
+		<input class="form-control" type="text" name="nota" required placeholder="Digite a nota do aluno">
+		<button class="btn-success">Adicionar</button>
+	</form>
 	</div>
 
 {% endblock conteudo %}
